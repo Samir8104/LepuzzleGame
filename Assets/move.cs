@@ -15,6 +15,7 @@ public class move : MonoBehaviour
     public LayerMask whatIsGround;
     private int extraJumps;
     public int extraJumpsValue;
+    public bool inFuture = true;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -39,6 +40,15 @@ public class move : MonoBehaviour
         if (isGrounded == true)
         {
             extraJumps = extraJumpsValue;
+            if(Input.GetKeyDown(KeyCode.J) && inFuture == true)
+            {
+                transform.position = new Vector2(rb.position.x, rb.position.y - 50f);
+                inFuture = false;
+            } else if(Input.GetKeyDown(KeyCode.J) && inFuture == false)
+            {
+                transform.position = new Vector2(rb.position.x, rb.position.y + 50f);
+                inFuture = true;
+            }
         }
             if (Input.GetKeyDown(KeyCode.Space) && extraJumps > 0)
             {
