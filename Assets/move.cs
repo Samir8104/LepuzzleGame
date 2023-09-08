@@ -9,7 +9,7 @@ public class move : MonoBehaviour
     private float moveInput;
     private Rigidbody2D rb;
     private bool facingRight = true;
-    private bool isGrounded;
+    public bool isGrounded;
     public Transform groundCheck;
     public float checkRadius;
     public LayerMask whatIsGround;
