@@ -10,29 +10,75 @@ public class move : MonoBehaviour
     private Rigidbody2D rb;
     private bool facingRight = true;
     public bool isGrounded;
+    public Transform bounceCheck;
     public Transform groundCheck;
     public float checkRadius;
     public LayerMask whatIsGround;
+    public LayerMask whatIsCactus;
     private int extraJumps;
     public int extraJumpsValue;
     public bool inFuture = true;
+    private bool warping = false;
+    public float cooldown = 50f;
+    private bool hitCactus = false;
+    public float bounceRadius = 5f;
+    private float collisionCD = 50f;
+    private float hitstun = 0f;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
     void FixedUpdate()
     {
+        hitstun -= 1f;
+        collisionCD -= 1f;
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
-        Debug.Log(isGrounded);
-        moveInput = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
-
+        hitCactus = Physics2D.OverlapCircle(bounceCheck.position, bounceRadius, whatIsCactus);
+        //Allows moving only if the player is not time travelling
+        if (!warping)
+        {
+            moveInput = Input.GetAxis("Horizontal");
+            rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+        } else
+        //Locks the players movement and velocity and moves them slightly upwards when they time travel
+        {
+            rb.velocity = new Vector2(0, 1);
+            cooldown -= 1f;
+        }
+        // Time travel
+        if(cooldown < 0)
+        {
+            cooldown = 50f;
+            warping = false;
+            if (inFuture == true)
+            {
+                transform.position = new Vector2(rb.position.x, rb.position.y - 50f);
+                inFuture = false;
+            } else
+            {
+                transform.position = new Vector2(rb.position.x, rb.position.y + 50f);
+                inFuture = true;
+            }
+        }
+        // Flips the player based on the direction they are facing
         if(facingRight == false && moveInput > 0)
         {
             Flip();
         } else if (facingRight == true && moveInput < 0)
         {
             Flip();
+        }
+        // If the player collides with a cactus, applies a large force propelling them away
+        if (hitCactus && collisionCD < 0f)
+        {
+            collisionCD = 30f;
+            hitstun = 30f;
+            Debug.Log("Hit a cactus");
+        }
+        if (hitstun > 0f)
+        {
+            rb.AddForce(new Vector2(rb.velocity.x * -2,1), ForceMode2D.Impulse);
+            hitstun -= 1f;
         }
     }
     void Update()
@@ -42,12 +88,10 @@ public class move : MonoBehaviour
             extraJumps = extraJumpsValue;
             if(Input.GetKeyDown(KeyCode.J) && inFuture == true)
             {
-                transform.position = new Vector2(rb.position.x, rb.position.y - 50f);
-                inFuture = false;
-            } else if(Input.GetKeyDown(KeyCode.J) && inFuture == false)
+                warping = true;
+            } else if(Input.GetKeyDown(KeyCode.J) && inFuture == false && warping == false)
             {
-                transform.position = new Vector2(rb.position.x, rb.position.y + 50f);
-                inFuture = true;
+                warping = true;
             }
         }
             if (Input.GetKeyDown(KeyCode.Space) && extraJumps > 0)
