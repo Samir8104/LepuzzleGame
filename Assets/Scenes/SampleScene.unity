@@ -574,7 +574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2897902248665573932, guid: 498181c7a3f1382478b7540da1bd7039, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.5021
+      value: 5.79
       objectReference: {fileID: 0}
     - target: {fileID: 2897902248665573932, guid: 498181c7a3f1382478b7540da1bd7039, type: 3}
       propertyPath: m_LocalPosition.y
@@ -862,6 +862,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1660454381123812007, guid: e6d211b5736aa3a4bb5d43ab0ef5ac07, type: 3}
+      propertyPath: bounceCheck
+      value: 
+      objectReference: {fileID: 1087985905}
+    - target: {fileID: 1660454381123812007, guid: e6d211b5736aa3a4bb5d43ab0ef5ac07, type: 3}
       propertyPath: groundCheck
       value: 
       objectReference: {fileID: 361829363}
@@ -874,6 +878,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6d211b5736aa3a4bb5d43ab0ef5ac07, type: 3}
+--- !u!4 &1087985905 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7110879620041022105, guid: e6d211b5736aa3a4bb5d43ab0ef5ac07, type: 3}
+  m_PrefabInstance: {fileID: 1087985904}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1107126285
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1398,7 +1407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8330550269287319024, guid: e077d245583fd9248bfcb39c8558dc28, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.84
+      value: -4.47
       objectReference: {fileID: 0}
     - target: {fileID: 8330550269287319024, guid: e077d245583fd9248bfcb39c8558dc28, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1754,14 +1763,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 640031693}
-    - target: {fileID: 0}
-      propertyPath: pastVers
-      value: 
-      objectReference: {fileID: 1538019913}
     - target: {fileID: 8376712012652749960, guid: fcc955f2aed7c4df8bf50b3e60786c33, type: 3}
       propertyPath: m_Name
       value: FuturePushBlock
