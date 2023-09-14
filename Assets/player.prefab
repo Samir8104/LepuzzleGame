@@ -105,7 +105,7 @@ MonoBehaviour:
   jumpForce: 15
   isGrounded: 0
   bounceCheck: {fileID: 7110879620041022105}
-  groundCheck: {fileID: 2390063970892086147, guid: 7d0b7734233267946b17ed2ae491f217, type: 3}
+  groundCheck: {fileID: 3307246848815044834}
   checkRadius: 0.87
   whatIsGround:
     serializedVersion: 2
