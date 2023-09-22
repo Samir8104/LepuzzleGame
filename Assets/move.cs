@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class move : MonoBehaviour
 {
     public float speed;
@@ -15,6 +15,7 @@ public class move : MonoBehaviour
     public float checkRadius;
     public LayerMask whatIsGround;
     public LayerMask whatIsCactus;
+    public LayerMask whatIsGoal;
     private int extraJumps;
     public int extraJumpsValue;
     public bool inFuture = true;
@@ -24,6 +25,7 @@ public class move : MonoBehaviour
     public float bounceRadius = 5f;
     private float collisionCD = 50f;
     private float hitstun = 0f;
+    private bool hitGoal = false;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -34,6 +36,12 @@ public class move : MonoBehaviour
         collisionCD -= 1f;
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
         hitCactus = Physics2D.OverlapCircle(bounceCheck.position, bounceRadius, whatIsCactus);
+        hitGoal = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGoal);
+        // Changes the scene forward one if the player hits a goal object
+        if (hitGoal)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
         //Allows moving only if the player is not time travelling
         if (!warping)
         {

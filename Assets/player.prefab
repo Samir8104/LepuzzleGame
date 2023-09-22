@@ -117,6 +117,9 @@ MonoBehaviour:
   inFuture: 1
   cooldown: 50
   bounceRadius: 0.68
+  whatIsGoal:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!61 &-5195635657064998037
 BoxCollider2D:
   m_ObjectHideFlags: 0
