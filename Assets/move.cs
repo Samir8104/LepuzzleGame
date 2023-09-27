@@ -26,6 +26,8 @@ public class move : MonoBehaviour
     private float collisionCD = 50f;
     private float hitstun = 0f;
     private bool hitGoal = false;
+    private bool dead = false;
+    private float deathTimer = 70f;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -43,7 +45,7 @@ public class move : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
         //Allows moving only if the player is not time travelling
-        if (!warping)
+        if (!warping && !dead)
         {
             moveInput = Input.GetAxis("Horizontal");
             rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
@@ -88,6 +90,13 @@ public class move : MonoBehaviour
             rb.AddForce(new Vector2(rb.velocity.x * -2,1), ForceMode2D.Impulse);
             hitstun -= 1f;
         }
+        // Resets the scene if the player is dead
+        if (dead) {
+            deathTimer -= 1f;
+        }
+        if (deathTimer <= 0f) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
     void Update()
     {
@@ -117,5 +126,13 @@ public class move : MonoBehaviour
         Vector3 Scaler = transform.localScale;
         Scaler.x *= -1;
         transform.localScale = Scaler;
+    }
+    // Makes the player dead if the player comes into contact with a kill block
+    void OnTriggerEnter2D(Collider2D col) {
+        Debug.Log("Collided");
+        if(col.tag == "KillBlock") {
+            Debug.Log("HitKillBlock");
+            dead = true;
+        }
     }
 }
