@@ -12,10 +12,14 @@ public class move : MonoBehaviour
     public bool isGrounded;
     public Transform bounceCheck;
     public Transform groundCheck;
+    public GameObject Sapling;
+    public GameObject player;
     public float checkRadius;
     public LayerMask whatIsGround;
     public LayerMask whatIsCactus;
     public LayerMask whatIsGoal;
+    public LayerMask whatIsDirt;
+    public GameObject Tree;
     private int extraJumps;
     public int extraJumpsValue;
     public bool inFuture = true;
@@ -28,6 +32,8 @@ public class move : MonoBehaviour
     private bool hitGoal = false;
     private bool dead = false;
     private float deathTimer = 70f;
+    private int seeds = 0;
+    public bool onDirt = false;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -37,6 +43,7 @@ public class move : MonoBehaviour
         hitstun -= 1f;
         collisionCD -= 1f;
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
+        onDirt = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsDirt);
         hitCactus = Physics2D.OverlapCircle(bounceCheck.position, bounceRadius, whatIsCactus);
         hitGoal = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGoal);
         // Changes the scene forward one if the player hits a goal object
@@ -49,14 +56,15 @@ public class move : MonoBehaviour
         {
             moveInput = Input.GetAxis("Horizontal");
             rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
-        } else
+        }
+        else
         //Locks the players movement and velocity and moves them slightly upwards when they time travel
         {
             rb.velocity = new Vector2(0, 1);
             cooldown -= 1f;
         }
         // Time travel
-        if(cooldown < 0)
+        if (cooldown < 0)
         {
             cooldown = 50f;
             warping = false;
@@ -64,17 +72,19 @@ public class move : MonoBehaviour
             {
                 transform.position = new Vector2(rb.position.x, rb.position.y - 50f);
                 inFuture = false;
-            } else
+            }
+            else
             {
                 transform.position = new Vector2(rb.position.x, rb.position.y + 50f);
                 inFuture = true;
             }
         }
         // Flips the player based on the direction they are facing
-        if(facingRight == false && moveInput > 0)
+        if (facingRight == false && moveInput > 0)
         {
             Flip();
-        } else if (facingRight == true && moveInput < 0)
+        }
+        else if (facingRight == true && moveInput < 0)
         {
             Flip();
         }
@@ -87,37 +97,54 @@ public class move : MonoBehaviour
         }
         if (hitstun > 0f)
         {
-            rb.AddForce(new Vector2(rb.velocity.x * -2,1), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(rb.velocity.x * -2, 1), ForceMode2D.Impulse);
             hitstun -= 1f;
         }
         // Resets the scene if the player is dead
-        if (dead) {
+        if (dead)
+        {
             deathTimer -= 1f;
         }
-        if (deathTimer <= 0f) {
+        if (deathTimer <= 0f)
+        {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
     void Update()
     {
+
         if (isGrounded == true)
         {
+            if (onDirt)
+            {
+                if (Input.GetKeyDown(KeyCode.K) && seeds > 0)
+                {
+                    Debug.Log("Planted Tree");
+                    seeds--;
+                    GameObject a = Instantiate(Sapling) as GameObject;
+                    a.transform.position = new Vector2(rb.position.x, rb.position.y);
+                    GameObject b = Instantiate(Tree) as GameObject;
+                    b.transform.position = new Vector2(rb.position.x, rb.position.y + 52);
+                }
+            }
             extraJumps = extraJumpsValue;
-            if(Input.GetKeyDown(KeyCode.J) && inFuture == true)
+            if (Input.GetKeyDown(KeyCode.J) && inFuture == true)
             {
                 warping = true;
-            } else if(Input.GetKeyDown(KeyCode.J) && inFuture == false && warping == false)
+            }
+            else if (Input.GetKeyDown(KeyCode.J) && inFuture == false && warping == false)
             {
                 warping = true;
             }
         }
-            if (Input.GetKeyDown(KeyCode.Space) && extraJumps > 0)
-            {
-                rb.velocity = Vector2.up * jumpForce;
-                extraJumps--;
-            } else if (Input.GetKeyDown(KeyCode.Space) && extraJumps == 0 && isGrounded == true)
-            {
-                rb.velocity = Vector2.up * jumpForce;
+        if (Input.GetKeyDown(KeyCode.Space) && extraJumps > 0)
+        {
+            rb.velocity = Vector2.up * jumpForce;
+            extraJumps--;
+        }
+        else if (Input.GetKeyDown(KeyCode.Space) && extraJumps == 0 && isGrounded == true)
+        {
+            rb.velocity = Vector2.up * jumpForce;
         }
     }
     void Flip()
@@ -128,11 +155,21 @@ public class move : MonoBehaviour
         transform.localScale = Scaler;
     }
     // Makes the player dead if the player comes into contact with a kill block
-    void OnTriggerEnter2D(Collider2D col) {
+    void OnTriggerEnter2D(Collider2D col)
+    {
         Debug.Log("Collided");
-        if(col.tag == "KillBlock") {
+        if (col.tag == "KillBlock")
+        {
             Debug.Log("HitKillBlock");
             dead = true;
+        }
+        if (col.tag == "SeedBag")
+        {
+            seeds += 1;
+            Debug.Log("GotASeed");
+            Destroy(col.gameObject);
+            Debug.Log(seeds);
+
         }
     }
 }
