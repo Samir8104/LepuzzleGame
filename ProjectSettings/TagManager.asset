@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Cactus
   - KillBlock
+  - DirtPile
+  - SeedBag
   layers:
   - Default
   - TransparentFX
@@ -16,7 +18,7 @@ TagManager:
   - Ground
   - Cactus
   - LevelComplete
-  - 
+  - DirtPile
   - 
   - 
   - 

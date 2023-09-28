@@ -106,6 +106,8 @@ MonoBehaviour:
   isGrounded: 0
   bounceCheck: {fileID: 7110879620041022105}
   groundCheck: {fileID: 3307246848815044834}
+  Sapling: {fileID: 2515931906353597575, guid: 1bf416dd2329ca14092bacd5eb7d63ee, type: 3}
+  player: {fileID: 2701208553307556688}
   checkRadius: 0.87
   whatIsGround:
     serializedVersion: 2
@@ -113,13 +115,18 @@ MonoBehaviour:
   whatIsCactus:
     serializedVersion: 2
     m_Bits: 128
+  whatIsGoal:
+    serializedVersion: 2
+    m_Bits: 256
+  whatIsDirt:
+    serializedVersion: 2
+    m_Bits: 512
+  Tree: {fileID: 1217012640729473103, guid: 9f6a4a12b0115df4ca2c2f2a1ed4c26b, type: 3}
   extraJumpsValue: 0
   inFuture: 1
   cooldown: 50
   bounceRadius: 0.68
-  whatIsGoal:
-    serializedVersion: 2
-    m_Bits: 256
+  onDirt: 0
 --- !u!61 &-5195635657064998037
 BoxCollider2D:
   m_ObjectHideFlags: 0

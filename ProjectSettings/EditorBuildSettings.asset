@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/2 - water.unity
     guid: cd10fc6169961434cb8fd0116baa02d7
   - enabled: 1
+    path: Assets/Scenes/3 - cacti.unity
+    guid: 05f3c6167bdc07943a8d9295fd6ef067
+  - enabled: 1
     path: Assets/Scenes/Industrial1.unity
     guid: 2d9d2847d7fead242976afd6a1c48396
   - enabled: 1
