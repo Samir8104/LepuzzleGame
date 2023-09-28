@@ -34,9 +34,11 @@ public class move : MonoBehaviour
     private float deathTimer = 70f;
     private int seeds = 0;
     public bool onDirt = false;
+    private Animator animator;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
     void FixedUpdate()
     {
@@ -108,6 +110,33 @@ public class move : MonoBehaviour
         if (deathTimer <= 0f)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        if(isGrounded && rb.velocity.x != 0)
+        {
+            animator.SetBool("IsRunning", true);
+            Debug.Log("Running");
+        } else
+        {
+            animator.SetBool("IsRunning", false);
+        }
+        if(!isGrounded && rb.velocity.y > 0)
+        {
+            Debug.Log("GoingUP");
+            animator.SetBool("GoingUp", true);
+            animator.SetBool("IsRunning", false);
+        } else
+        {
+            animator.SetBool("GoingUp", false);
+        }
+        if (!isGrounded && rb.velocity.y < 0)
+        {
+            Debug.Log("Goingdown");
+            animator.SetBool("GoingDown", true);
+            animator.SetBool("IsRunning", false);
+        }
+        else
+        {
+            animator.SetBool("GoingDown", false);
         }
     }
     void Update()
