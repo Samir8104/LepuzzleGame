@@ -23,7 +23,7 @@ public class move : MonoBehaviour
     private int extraJumps;
     public int extraJumpsValue;
     public bool inFuture = true;
-    private bool warping = false;
+    public bool warping = false;
     public float cooldown = 50f;
     private bool hitCactus = false;
     public float bounceRadius = 5f;

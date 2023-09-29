@@ -125,6 +125,7 @@ MonoBehaviour:
   Tree: {fileID: 1217012640729473103, guid: 9f6a4a12b0115df4ca2c2f2a1ed4c26b, type: 3}
   extraJumpsValue: 0
   inFuture: 1
+  warping: 0
   cooldown: 50
   bounceRadius: 0.68
   onDirt: 0
