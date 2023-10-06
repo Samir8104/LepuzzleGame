@@ -807,6 +807,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1426593532745407487, guid: 630d9ce15ee46438f8f5321ed4fc71e8, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1214712069}
     - target: {fileID: 7793305792514121083, guid: 630d9ce15ee46438f8f5321ed4fc71e8, type: 3}
       propertyPath: m_Name
       value: sadbackground
@@ -66207,6 +66211,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6d211b5736aa3a4bb5d43ab0ef5ac07, type: 3}
+--- !u!1 &1214712069 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2701208553307556688, guid: e6d211b5736aa3a4bb5d43ab0ef5ac07, type: 3}
+  m_PrefabInstance: {fileID: 1214712068}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1232172694
 PrefabInstance:
   m_ObjectHideFlags: 0

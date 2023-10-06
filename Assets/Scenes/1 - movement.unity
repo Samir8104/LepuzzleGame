@@ -199,6 +199,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6403807689670608869, guid: 0522b83e0244d414caa5a236ccab249d, type: 3}
   m_PrefabInstance: {fileID: 296330311}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &84696493 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2701208553307556688, guid: e6d211b5736aa3a4bb5d43ab0ef5ac07, type: 3}
+  m_PrefabInstance: {fileID: 657898804}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &86616362
 GameObject:
   m_ObjectHideFlags: 0
@@ -27489,6 +27494,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: player
       objectReference: {fileID: 0}
+    - target: {fileID: 2701208553307556688, guid: e6d211b5736aa3a4bb5d43ab0ef5ac07, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29635,6 +29644,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 980f7582c3d37ea4ba1f8dfe4692c288, type: 3}
+--- !u!1 &1606031824 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6946656252246641032, guid: 265327e35121721438c0a81933192e5f, type: 3}
+  m_PrefabInstance: {fileID: 1860205007}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1624275428 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3170302262226433493, guid: 56e2e8b561f494b49bd9d117942b59a7, type: 3}
@@ -30151,6 +30165,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4931154776926501249, guid: 265327e35121721438c0a81933192e5f, type: 3}
+      propertyPath: note
+      value: 
+      objectReference: {fileID: 1606031824}
     - target: {fileID: 4931154776926501249, guid: 265327e35121721438c0a81933192e5f, type: 3}
       propertyPath: message
       value: 
@@ -30929,6 +30947,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1426593532745407487, guid: 630d9ce15ee46438f8f5321ed4fc71e8, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 84696493}
     - target: {fileID: 7793305792514121083, guid: 630d9ce15ee46438f8f5321ed4fc71e8, type: 3}
       propertyPath: m_Name
       value: sadbackground
